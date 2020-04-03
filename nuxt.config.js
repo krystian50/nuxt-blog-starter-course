@@ -25,7 +25,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['@/assets/scss/main.scss'],
+  css: ['@/assets/scss/main.scss', 'github-markdown-css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -56,12 +56,15 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
+    extend(config, _ctx) {
       config.module.rules.push({
         test: /\.md$/,
         loader: 'frontmatter-markdown-loader',
         options: {
-          mode: [FMMode.VUE_COMPONENT]
+          mode: [FMMode.VUE_COMPONENT],
+          vue: {
+            root: 'markdown-body'
+          }
         }
       })
     }
