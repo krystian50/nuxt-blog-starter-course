@@ -1,15 +1,22 @@
 <template>
-  <div>
-    <TestComponent />
+  <div class="container">
+    <div class="section">
+      <component :is="selectedArticle" />
+    </div>
   </div>
 </template>
 
 <script>
-import test from '~/articles/test.md'
-
 export default {
-  components: {
-    TestComponent: test.vue.component
+  data: () => ({
+    attributes: {},
+    selectedArticle: null
+  }),
+
+  created() {
+    const markdown = require(`~/articles/${this.$route.params.slug}.md`)
+    this.attributes = markdown.attributes
+    this.selectedArticle = markdown.vue.component
   }
 }
 </script>
